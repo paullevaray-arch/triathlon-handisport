@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscription — Triathlon Tous Ensemble</title>
+  <meta name="description" content="Formulaire d'inscription au Triathlon Tous Ensemble.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="evitement" href="#contenu">Aller au contenu</a>
+
+  <header class="entete">
+    <div class="conteneur">
+      <a class="logo" href="index.html">Triathlon <span>Tous Ensemble</span></a>
+      <nav class="nav" aria-label="Navigation principale">
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="evenement.html">L'événement</a></li>
+          <li><a href="programme.html">Programme</a></li>
+          <li><a href="infos-pratiques.html">Infos pratiques</a></li>
+          <li><a href="inscription.html" aria-current="page">Inscription</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenu" class="conteneur">
+    <h1>Inscription</h1>
+    <p class="chapeau">
+      Remplissez ce formulaire pour participer au Triathlon Tous Ensemble.
+      Les champs marqués d'un <span class="obligatoire">*</span> sont obligatoires.
+    </p>
+
+    <!-- Formulaire de démonstration : il n'est relié à aucun serveur,
+         les données ne sont ni envoyées ni enregistrées. -->
+    <form class="formulaire" action="inscription.html" method="get">
+      <fieldset>
+        <legend>Vos coordonnées</legend>
+        <div class="ligne">
+          <div class="champ">
+            <label for="prenom">Prénom <span class="obligatoire">*</span></label>
+            <input type="text" id="prenom" name="prenom" autocomplete="given-name" required>
+          </div>
+          <div class="champ">
+            <label for="nom">Nom <span class="obligatoire">*</span></label>
+            <input type="text" id="nom" name="nom" autocomplete="family-name" required>
+          </div>
+        </div>
+        <div class="ligne">
+          <div class="champ">
+            <label for="naissance">Date de naissance <span class="obligatoire">*</span></label>
+            <input type="date" id="naissance" name="naissance" autocomplete="bday" required>
+          </div>
+          <div class="champ">
+            <label for="telephone">Téléphone</label>
+            <input type="tel" id="telephone" name="telephone" autocomplete="tel">
+          </div>
+        </div>
+        <div class="champ">
+          <label for="email">Adresse e-mail <span class="obligatoire">*</span></label>
+          <input type="email" id="email" name="email" autocomplete="email" required>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Votre course</legend>
+        <div class="champ">
+          <label for="format">Format choisi <span class="obligatoire">*</span></label>
+          <select id="format" name="format" required>
+            <option value="">— Choisir un format —</option>
+            <option value="decouverte">Découverte (sans classement)</option>
+            <option value="competition">Compétition</option>
+            <option value="relais">Relais en équipe</option>
+          </select>
+        </div>
+        <div class="champ">
+          <label for="categorie">Catégorie</label>
+          <select id="categorie" name="categorie">
+            <option value="">— Je ne sais pas encore —</option>
+            <option value="ptwc">PTWC — fauteuil roulant</option>
+            <option value="pts">PTS2 à PTS5 — handicap moteur</option>
+            <option value="ptvi">PTVI — déficience visuelle</option>
+          </select>
+          <p class="aide">Uniquement pour le format Compétition.</p>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Besoins d'accompagnement</legend>
+        <label class="choix">
+          <input type="checkbox" name="besoins" value="handler">
+          J'ai besoin d'un bénévole « handler » pour les transitions
+        </label>
+        <label class="choix">
+          <input type="checkbox" name="besoins" value="guide">
+          J'ai besoin d'un guide (déficience visuelle)
+        </label>
+        <label class="choix">
+          <input type="checkbox" name="besoins" value="pret-materiel">
+          Je souhaite emprunter du matériel adapté
+        </label>
+        <label class="choix">
+          <input type="checkbox" name="besoins" value="lsf">
+          Je souhaite un interprète en langue des signes
+        </label>
+        <div class="champ">
+          <label for="message">Autres précisions</label>
+          <textarea id="message" name="message" rows="4"></textarea>
+        </div>
+      </fieldset>
+
+      <label class="choix">
+        <input type="checkbox" name="certificat" required>
+        Je fournirai un certificat médical de non contre-indication à la pratique du triathlon <span class="obligatoire">*</span>
+      </label>
+
+      <div class="actions">
+        <button class="bouton" type="submit">Envoyer mon inscription</button>
+        <button class="bouton secondaire" type="reset">Effacer</button>
+      </div>
+    </form>
+  </main>
+
+  <footer class="pied">
+    <div class="conteneur">
+      <p>Triathlon Tous Ensemble — événement fictif réalisé dans le cadre d'un projet étudiant.</p>
+      <p>Photos issues de Wikimedia Commons, sous licences Creative Commons (crédits sous chaque image).</p>
+    </div>
+  </footer>
+</body>
+</html>

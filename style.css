@@ -1,0 +1,504 @@
+/* =========================================================
+   Triathlon Tous Ensemble — feuille de style
+   ========================================================= */
+
+:root {
+  --bleu: #0b4f8a;
+  --bleu-fonce: #08355c;
+  --orange: #e8590c;
+  --vert: #2b8a3e;
+  --fond: #f6f8fb;
+  --carte: #ffffff;
+  --texte: #1d2733;
+  --texte-doux: #4a5868;
+  --bordure: #d5dde7;
+  --rayon: 12px;
+  --ombre: 0 4px 16px rgba(8, 53, 92, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 112.5%; /* texte un peu plus grand pour la lisibilité */
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--texte);
+  background: var(--fond);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--bleu);
+}
+
+a:hover {
+  color: var(--orange);
+}
+
+/* Focus clavier bien visible (accessibilité) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 3px;
+}
+
+/* Lien d'évitement */
+.evitement {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--orange);
+  color: #fff;
+  padding: 0.6rem 1rem;
+  z-index: 100;
+}
+
+.evitement:focus {
+  left: 1rem;
+}
+
+/* ---------- En-tête et navigation ---------- */
+
+.entete {
+  background: var(--bleu-fonce);
+  color: #fff;
+}
+
+.entete .conteneur {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.logo {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+}
+
+.logo span {
+  color: #ffb380;
+}
+
+.logo:hover {
+  color: #fff;
+}
+
+.nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.nav a {
+  display: block;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.92rem;
+}
+
+.nav a:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.nav a[aria-current="page"] {
+  background: var(--orange);
+  font-weight: 600;
+}
+
+/* ---------- Mise en page ---------- */
+
+.conteneur {
+  width: min(1100px, 100% - 2rem);
+  margin-inline: auto;
+}
+
+main {
+  padding: 2.5rem 0 3rem;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.25;
+  color: var(--bleu-fonce);
+}
+
+h1 {
+  font-size: 2rem;
+  margin-top: 0;
+}
+
+h2 {
+  font-size: 1.45rem;
+  margin-top: 2.2rem;
+}
+
+.chapeau {
+  font-size: 1.15rem;
+  color: var(--texte-doux);
+  max-width: 60ch;
+}
+
+/* Bandeau d'accueil */
+.banniere {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  background: var(--carte);
+  border-radius: var(--rayon);
+  box-shadow: var(--ombre);
+  padding: 2rem;
+}
+
+.banniere h1 {
+  font-size: 2.2rem;
+}
+
+.etiquette {
+  display: inline-block;
+  background: #fff1e6;
+  color: #a33f06;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  margin-bottom: 0.8rem;
+}
+
+/* Cartes */
+.grille {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.carte {
+  background: var(--carte);
+  border: 1px solid var(--bordure);
+  border-radius: var(--rayon);
+  padding: 1.4rem;
+  box-shadow: var(--ombre);
+}
+
+.carte h2,
+.carte h3 {
+  margin-top: 0;
+}
+
+.carte .icone {
+  font-size: 2rem;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+/* Bloc à compléter par l'étudiant */
+.a-completer {
+  background: #fff8db;
+  border: 1px dashed #c9a400;
+  padding: 0 0.3rem;
+  border-radius: 4px;
+}
+
+/* Figures et crédits photo */
+figure {
+  margin: 0;
+}
+
+figure img {
+  border-radius: var(--rayon);
+}
+
+figcaption {
+  font-size: 0.8rem;
+  color: var(--texte-doux);
+  margin-top: 0.4rem;
+}
+
+.deux-colonnes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+/* Boutons */
+.bouton {
+  display: inline-block;
+  background: var(--orange);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.75rem 1.4rem;
+  border: none;
+  border-radius: 999px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.bouton:hover {
+  background: #c94a06;
+  color: #fff;
+}
+
+.bouton.secondaire {
+  background: transparent;
+  color: var(--bleu);
+  border: 2px solid var(--bleu);
+}
+
+.bouton.secondaire:hover {
+  background: var(--bleu);
+  color: #fff;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+/* ---------- Programme (frise) ---------- */
+
+.frise {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+  border-left: 4px solid var(--bleu);
+}
+
+.frise li {
+  position: relative;
+  padding: 0 0 1.5rem 1.5rem;
+}
+
+.frise li::before {
+  content: "";
+  position: absolute;
+  left: -12px;
+  top: 0.35rem;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--carte);
+  border: 4px solid var(--orange);
+}
+
+.frise .heure {
+  display: inline-block;
+  font-weight: 700;
+  color: var(--bleu-fonce);
+  min-width: 4.5rem;
+}
+
+.frise h3 {
+  display: inline;
+  font-size: 1.1rem;
+}
+
+.frise p {
+  margin: 0.3rem 0 0;
+  color: var(--texte-doux);
+}
+
+/* ---------- Tableaux ---------- */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--carte);
+  border-radius: var(--rayon);
+  overflow: hidden;
+  box-shadow: var(--ombre);
+  margin-top: 1rem;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--bordure);
+}
+
+th {
+  background: var(--bleu);
+  color: #fff;
+}
+
+tbody tr:nth-child(even) {
+  background: #f1f5fa;
+}
+
+/* ---------- Formulaire ---------- */
+
+.formulaire {
+  background: var(--carte);
+  border: 1px solid var(--bordure);
+  border-radius: var(--rayon);
+  padding: 2rem;
+  box-shadow: var(--ombre);
+  max-width: 760px;
+}
+
+fieldset {
+  border: 1px solid var(--bordure);
+  border-radius: var(--rayon);
+  padding: 1rem 1.25rem 1.25rem;
+  margin: 0 0 1.5rem;
+}
+
+legend {
+  font-weight: 700;
+  color: var(--bleu-fonce);
+  padding: 0 0.4rem;
+}
+
+.champ {
+  margin-top: 1rem;
+}
+
+.champ label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.ligne {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 1rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+select,
+textarea {
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  font: inherit;
+  border: 2px solid var(--bordure);
+  border-radius: 8px;
+  background: #fff;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--bleu);
+}
+
+.choix {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  font-weight: 400;
+}
+
+.choix input {
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-top: 0.25rem;
+  flex-shrink: 0;
+}
+
+.aide {
+  font-size: 0.85rem;
+  color: var(--texte-doux);
+  margin: 0.25rem 0 0;
+}
+
+.obligatoire {
+  color: #b02a00;
+}
+
+.confirmation {
+  background: #e8f6ec;
+  border: 2px solid var(--vert);
+  border-radius: var(--rayon);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ---------- Pied de page ---------- */
+
+.pied {
+  background: var(--bleu-fonce);
+  color: #dbe6f3;
+  padding: 2rem 0;
+  font-size: 0.85rem;
+}
+
+.pied a {
+  color: #fff;
+}
+
+.pied p {
+  margin: 0.3rem 0;
+}
+
+/* ---------- Écrans étroits ---------- */
+
+@media (max-width: 760px) {
+  html {
+    font-size: 100%;
+  }
+
+  .banniere,
+  .deux-colonnes,
+  .ligne {
+    grid-template-columns: 1fr;
+  }
+
+  .banniere {
+    padding: 1.25rem;
+  }
+
+  .banniere h1,
+  h1 {
+    font-size: 1.7rem;
+  }
+
+  .formulaire {
+    padding: 1.25rem;
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
+
+  th,
+  td {
+    padding: 0.6rem;
+  }
+}
