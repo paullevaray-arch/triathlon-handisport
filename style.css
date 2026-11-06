@@ -1,19 +1,29 @@
 /* =========================================================
    Triathlon Tous Ensemble — feuille de style
+   Idée : le parcours est un seul trait qui change de nature
+   selon l'épreuve — vague (natation), trait plein (vélo),
+   points (course à pied). Ce trait est la signature du site.
+   Polices : Bricolage Grotesque (titres), Atkinson
+   Hyperlegible (texte, conçue pour la basse vision).
    ========================================================= */
 
 :root {
-  --bleu: #0b4f8a;
-  --bleu-fonce: #08355c;
-  --orange: #e8590c;
-  --vert: #2b8a3e;
-  --fond: #f6f8fb;
-  --carte: #ffffff;
-  --texte: #1d2733;
-  --texte-doux: #4a5868;
-  --bordure: #d5dde7;
-  --rayon: 12px;
-  --ombre: 0 4px 16px rgba(8, 53, 92, 0.08);
+  --eau: #061a30;       /* texte, pied de page */
+  --lac: #0d5a9e;       /* liens */
+  --ecume: #edf4f7;    /* fond de page */
+  --blanc: #ffffff;
+  --bouee: #f04a0a;     /* accent : bouées de nage */
+  --brume: #46586a;     /* texte secondaire */
+  --trait: #b9cbd6;     /* filets */
+  --vert: #1f6b34;
+
+  --titre: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --texte: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+
+  /* Les trois traits du parcours (valeur complète de `background`) */
+  --trace-nage: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='12' viewBox='0 0 26 12'%3E%3Cpath d='M0 6 Q6.5 -1 13 6 T26 6' fill='none' stroke='%23f04a0a' stroke-width='3.5'/%3E%3C/svg%3E") repeat-x 0 50% / 26px 12px;
+  --trace-velo: linear-gradient(var(--bouee), var(--bouee)) 0 50% / 100% 4px no-repeat;
+  --trace-course: radial-gradient(circle, var(--bouee) 3px, transparent 3.5px) 0 50% / 14px 12px repeat-x;
 }
 
 * {
@@ -26,10 +36,10 @@ html {
 
 body {
   margin: 0;
-  font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
-  line-height: 1.6;
-  color: var(--texte);
-  background: var(--fond);
+  font-family: var(--texte);
+  line-height: 1.65;
+  color: var(--eau);
+  background: var(--ecume);
 }
 
 img {
@@ -39,11 +49,13 @@ img {
 }
 
 a {
-  color: var(--bleu);
+  color: var(--lac);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
 }
 
 a:hover {
-  color: var(--orange);
+  color: var(--bouee);
 }
 
 /* Focus clavier bien visible (accessibilité) */
@@ -52,8 +64,9 @@ button:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-  outline: 3px solid var(--orange);
+  outline: 3px solid var(--eau);
   outline-offset: 3px;
+  box-shadow: 0 0 0 6px var(--bouee);
 }
 
 /* Lien d'évitement */
@@ -61,21 +74,22 @@ textarea:focus-visible {
   position: absolute;
   left: -9999px;
   top: 0;
-  background: var(--orange);
-  color: #fff;
+  background: var(--bouee);
+  color: var(--eau);
+  font-weight: 700;
   padding: 0.6rem 1rem;
   z-index: 100;
 }
 
 .evitement:focus {
   left: 1rem;
+  top: 1rem;
 }
 
 /* ---------- En-tête et navigation ---------- */
 
 .entete {
-  background: var(--bleu-fonce);
-  color: #fff;
+  border-bottom: 1px solid var(--trait);
 }
 
 .entete .conteneur {
@@ -84,23 +98,25 @@ textarea:focus-visible {
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem 2rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: 1.1rem;
+  padding-bottom: 1.1rem;
 }
 
 .logo {
-  font-size: 1.3rem;
+  font-family: var(--titre);
+  font-size: 1.45rem;
   font-weight: 700;
-  color: #fff;
+  letter-spacing: -0.02em;
+  color: var(--eau);
   text-decoration: none;
 }
 
 .logo span {
-  color: #ffb380;
+  font-weight: 500;
 }
 
 .logo:hover {
-  color: #fff;
+  color: var(--eau);
 }
 
 .nav ul {
@@ -109,103 +125,195 @@ textarea:focus-visible {
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.25rem;
+  gap: 0.25rem 1.6rem;
+}
+
+.nav li + li {
+  margin-top: 0;
 }
 
 .nav a {
   display: block;
-  padding: 0.45rem 0.8rem;
-  border-radius: 999px;
-  color: #fff;
+  padding: 0.3rem 0;
+  color: var(--eau);
   text-decoration: none;
-  font-size: 0.92rem;
+  font-weight: 700;
+  font-size: 0.95rem;
 }
 
 .nav a:hover {
-  background: rgba(255, 255, 255, 0.15);
-  color: #fff;
+  color: var(--lac);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
 }
 
+/* la page courante est soulignée d'une vague : le trait de la natation */
 .nav a[aria-current="page"] {
-  background: var(--orange);
-  font-weight: 600;
+  text-decoration: underline wavy var(--bouee);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
 }
 
 /* ---------- Mise en page ---------- */
 
 .conteneur {
-  width: min(1100px, 100% - 2rem);
+  width: min(1140px, 100% - 2.5rem);
   margin-inline: auto;
 }
 
 main {
-  padding: 2.5rem 0 3rem;
+  padding: 3.5rem 0 5rem;
 }
 
 h1,
 h2,
-h3 {
-  line-height: 1.25;
-  color: var(--bleu-fonce);
+h3,
+legend {
+  font-family: var(--titre);
+  color: var(--eau);
+  letter-spacing: -0.02em;
 }
 
 h1 {
-  font-size: 2rem;
-  margin-top: 0;
+  font-size: clamp(2.6rem, 6vw, 4.4rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  margin: 0 0 1.25rem;
+  max-width: 16ch;
 }
 
 h2 {
-  font-size: 1.45rem;
-  margin-top: 2.2rem;
+  font-size: clamp(1.8rem, 3.4vw, 2.4rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 3.5rem 0 1rem;
+}
+
+h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 0.5rem;
 }
 
 .chapeau {
-  font-size: 1.15rem;
-  color: var(--texte-doux);
-  max-width: 60ch;
+  font-size: 1.2rem;
+  color: var(--brume);
+  max-width: 54ch;
+  margin: 0 0 2rem;
 }
 
-/* Bandeau d'accueil */
+main > p,
+main > ul {
+  max-width: 68ch;
+}
+
+li + li {
+  margin-top: 0.4rem;
+}
+
+li::marker {
+  color: var(--bouee);
+}
+
+/* ---------- Accueil ---------- */
+
 .banniere {
   display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: 2rem;
-  align-items: center;
-  background: var(--carte);
-  border-radius: var(--rayon);
-  box-shadow: var(--ombre);
-  padding: 2rem;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 4rem;
+  align-items: start;
 }
 
-.banniere h1 {
-  font-size: 2.2rem;
+.banniere figure img {
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  max-height: 600px;
+  object-fit: cover;
 }
 
-.etiquette {
-  display: inline-block;
-  background: #fff1e6;
-  color: #a33f06;
-  font-weight: 600;
-  font-size: 0.85rem;
-  padding: 0.25rem 0.7rem;
-  border-radius: 999px;
-  margin-bottom: 0.8rem;
+.rendez-vous {
+  margin: 0 0 1.5rem;
+  font-size: 1.05rem;
 }
 
-/* Cartes */
+/* Le parcours : trois épreuves, un seul trait */
+.parcours {
+  display: flex;
+  list-style: none;
+  margin: 2.5rem 0 0;
+  padding: 0;
+  max-width: 34rem;
+  animation: tracer 1.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.parcours li {
+  flex: 1;
+  margin: 0;
+  position: relative;
+  padding: 0 0.5rem 1.6rem 0;
+}
+
+.parcours li::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 12px;
+}
+
+.parcours span {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--brume);
+}
+
+.parcours strong {
+  display: block;
+  font-family: var(--titre);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.nage::after {
+  background: var(--trace-nage);
+}
+
+.velo::after {
+  background: var(--trace-velo);
+}
+
+.course::after {
+  background: var(--trace-course);
+}
+
+@keyframes tracer {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* ---------- Colonnes d'information (sans boîtes) ---------- */
+
 .grille {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.25rem;
-  margin-top: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2.5rem 3rem;
+  margin-top: 1.75rem;
 }
 
 .carte {
-  background: var(--carte);
-  border: 1px solid var(--bordure);
-  border-radius: var(--rayon);
-  padding: 1.4rem;
-  box-shadow: var(--ombre);
+  position: relative;
+  border-top: 2px solid var(--eau);
+  padding-top: 1.1rem;
 }
 
 .carte h2,
@@ -213,77 +321,124 @@ h2 {
   margin-top: 0;
 }
 
+.carte h2 {
+  font-size: 1.6rem;
+}
+
+.carte p:last-child {
+  margin-bottom: 0;
+}
+
 .carte .icone {
-  font-size: 2rem;
+  font-size: 1.6rem;
   line-height: 1;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+
+/* Cartes des épreuves : le trait remplace le filet */
+.carte.nage,
+.carte.velo,
+.carte.course {
+  border-top: none;
+  padding-top: 1.9rem;
+}
+
+.carte.nage::before,
+.carte.velo::before,
+.carte.course::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 12px;
+}
+
+.carte.nage::before {
+  background: var(--trace-nage);
+}
+
+.carte.velo::before {
+  background: var(--trace-velo);
+}
+
+.carte.course::before {
+  background: var(--trace-course);
 }
 
 /* Bloc à compléter par l'étudiant */
 .a-completer {
-  background: #fff8db;
-  border: 1px dashed #c9a400;
+  background: #fff3b8;
+  border: 1px dashed #8a6a00;
   padding: 0 0.3rem;
-  border-radius: 4px;
+  border-radius: 3px;
 }
 
-/* Figures et crédits photo */
+/* ---------- Figures et crédits photo ---------- */
+
 figure {
   margin: 0;
 }
 
-figure img {
-  border-radius: var(--rayon);
-}
-
 figcaption {
-  font-size: 0.8rem;
-  color: var(--texte-doux);
-  margin-top: 0.4rem;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--brume);
+  margin-top: 0.7rem;
+  max-width: 60ch;
 }
 
 .deux-colonnes {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  gap: 4rem;
   align-items: start;
 }
 
-/* Boutons */
+.deux-colonnes > div > h2:first-child {
+  margin-top: 0;
+}
+
+/* ---------- Boutons ---------- */
+
 .bouton {
   display: inline-block;
-  background: var(--orange);
-  color: #fff;
-  font-weight: 600;
+  background: var(--bouee);
+  color: var(--eau);
+  font-family: var(--titre);
+  font-weight: 700;
+  font-size: 1.1rem;
+  line-height: 1.2;
   text-decoration: none;
-  padding: 0.75rem 1.4rem;
-  border: none;
+  padding: 0.8rem 1.6rem;
+  border: 2px solid var(--bouee);
   border-radius: 999px;
-  font-size: 1rem;
   cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 
 .bouton:hover {
-  background: #c94a06;
-  color: #fff;
+  background: var(--eau);
+  border-color: var(--eau);
+  color: var(--blanc);
 }
 
 .bouton.secondaire {
   background: transparent;
-  color: var(--bleu);
-  border: 2px solid var(--bleu);
+  border-color: var(--eau);
+  color: var(--eau);
 }
 
 .bouton.secondaire:hover {
-  background: var(--bleu);
-  color: #fff;
+  background: var(--eau);
+  color: var(--blanc);
 }
 
 .actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 1.25rem;
+  gap: 0.9rem;
+  margin-top: 2.25rem;
 }
 
 /* ---------- Programme (frise) ---------- */
@@ -291,42 +446,67 @@ figcaption {
 .frise {
   list-style: none;
   padding: 0;
-  margin: 1.5rem 0 0;
-  border-left: 4px solid var(--bleu);
+  margin: 2.5rem 0 0;
+  max-width: 760px;
 }
 
 .frise li {
   position: relative;
-  padding: 0 0 1.5rem 1.5rem;
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  column-gap: 2.2rem;
+  margin: 0;
+  padding-bottom: 1.9rem;
 }
 
+/* point d'étape */
 .frise li::before {
   content: "";
   position: absolute;
-  left: -12px;
-  top: 0.35rem;
-  width: 20px;
-  height: 20px;
+  z-index: 1;
+  left: calc(6rem + 1.1rem - 7px);
+  top: 0.6rem;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  background: var(--carte);
-  border: 4px solid var(--orange);
+  background: var(--bouee);
+}
+
+/* trait entre deux étapes */
+.frise li::after {
+  content: "";
+  position: absolute;
+  left: calc(6rem + 1.1rem - 1px);
+  top: 1rem;
+  bottom: -0.6rem;
+  width: 2px;
+  background: var(--trait);
+}
+
+.frise li:last-child::after {
+  display: none;
 }
 
 .frise .heure {
-  display: inline-block;
+  grid-row: span 2;
+  text-align: right;
+  font-family: var(--titre);
   font-weight: 700;
-  color: var(--bleu-fonce);
-  min-width: 4.5rem;
+  font-size: 1.5rem;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }
 
 .frise h3 {
-  display: inline;
-  font-size: 1.1rem;
+  margin: 0.2rem 0 0;
 }
 
 .frise p {
-  margin: 0.3rem 0 0;
-  color: var(--texte-doux);
+  margin: 0.2rem 0 0;
+  color: var(--brume);
+  max-width: 54ch;
 }
 
 /* ---------- Tableaux ---------- */
@@ -334,67 +514,75 @@ figcaption {
 table {
   width: 100%;
   border-collapse: collapse;
-  background: var(--carte);
-  border-radius: var(--rayon);
-  overflow: hidden;
-  box-shadow: var(--ombre);
-  margin-top: 1rem;
+  margin-top: 1.25rem;
 }
 
 th,
 td {
   text-align: left;
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid var(--bordure);
+  vertical-align: top;
+  padding: 0.9rem 1.2rem 0.9rem 0;
+  border-bottom: 1px solid var(--trait);
 }
 
 th {
-  background: var(--bleu);
-  color: #fff;
+  font-family: var(--titre);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--brume);
+  border-bottom: 2px solid var(--eau);
 }
 
-tbody tr:nth-child(even) {
-  background: #f1f5fa;
+td:first-child {
+  font-weight: 700;
+}
+
+tbody tr:hover {
+  background: var(--blanc);
 }
 
 /* ---------- Formulaire ---------- */
 
 .formulaire {
-  background: var(--carte);
-  border: 1px solid var(--bordure);
-  border-radius: var(--rayon);
-  padding: 2rem;
-  box-shadow: var(--ombre);
-  max-width: 760px;
+  background: var(--blanc);
+  border-top: 4px solid var(--eau);
+  padding: 2.2rem 2.4rem 2.4rem;
+  max-width: 780px;
 }
 
 fieldset {
-  border: 1px solid var(--bordure);
-  border-radius: var(--rayon);
-  padding: 1rem 1.25rem 1.25rem;
-  margin: 0 0 1.5rem;
+  border: none;
+  border-top: 1px solid var(--trait);
+  padding: 1.1rem 0 0.4rem;
+  margin: 0 0 1.8rem;
+}
+
+fieldset:first-of-type {
+  border-top: none;
+  padding-top: 0;
 }
 
 legend {
+  font-size: 1.5rem;
   font-weight: 700;
-  color: var(--bleu-fonce);
-  padding: 0 0.4rem;
+  padding: 0;
+  margin-bottom: 0.2rem;
 }
 
 .champ {
-  margin-top: 1rem;
+  margin-top: 1.1rem;
 }
 
 .champ label {
   display: block;
-  font-weight: 600;
-  margin-bottom: 0.3rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
 }
 
 .ligne {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0 1rem;
+  gap: 0 1.25rem;
 }
 
 input[type="text"],
@@ -404,48 +592,56 @@ input[type="date"],
 select,
 textarea {
   width: 100%;
-  padding: 0.65rem 0.75rem;
+  padding: 0.7rem 0.8rem;
   font: inherit;
-  border: 2px solid var(--bordure);
-  border-radius: 8px;
-  background: #fff;
+  color: var(--eau);
+  border: 2px solid var(--brume);
+  border-radius: 6px;
+  background: var(--blanc);
 }
 
 input:focus,
 select:focus,
 textarea:focus {
-  border-color: var(--bleu);
+  border-color: var(--lac);
 }
 
 .choix {
   display: flex;
   align-items: flex-start;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
+  gap: 0.7rem;
+  margin-top: 0.7rem;
   font-weight: 400;
+  cursor: pointer;
 }
 
 .choix input {
-  width: 1.2rem;
-  height: 1.2rem;
-  margin-top: 0.25rem;
+  width: 1.3rem;
+  height: 1.3rem;
+  margin-top: 0.2rem;
   flex-shrink: 0;
+  accent-color: var(--lac);
+  cursor: pointer;
 }
 
 .aide {
-  font-size: 0.85rem;
-  color: var(--texte-doux);
-  margin: 0.25rem 0 0;
+  font-size: 0.88rem;
+  color: var(--brume);
+  margin: 0.35rem 0 0;
+}
+
+main > .aide {
+  margin-top: 1.4rem;
 }
 
 .obligatoire {
   color: #b02a00;
+  font-weight: 700;
 }
 
 .confirmation {
-  background: #e8f6ec;
-  border: 2px solid var(--vert);
-  border-radius: var(--rayon);
+  background: #e3f2e7;
+  border-left: 5px solid var(--vert);
   padding: 1rem 1.25rem;
   margin-bottom: 1.5rem;
 }
@@ -453,25 +649,30 @@ textarea:focus {
 /* ---------- Pied de page ---------- */
 
 .pied {
-  background: var(--bleu-fonce);
-  color: #dbe6f3;
-  padding: 2rem 0;
+  background: var(--eau);
+  color: #c4d2df;
+  padding: 2.5rem 0;
   font-size: 0.85rem;
 }
 
 .pied a {
-  color: #fff;
+  color: var(--blanc);
 }
 
 .pied p {
   margin: 0.3rem 0;
+  max-width: 70ch;
 }
 
 /* ---------- Écrans étroits ---------- */
 
-@media (max-width: 760px) {
+@media (max-width: 800px) {
   html {
     font-size: 100%;
+  }
+
+  main {
+    padding-top: 2.5rem;
   }
 
   .banniere,
@@ -480,25 +681,73 @@ textarea:focus {
     grid-template-columns: 1fr;
   }
 
-  .banniere {
-    padding: 1.25rem;
+  .banniere,
+  .deux-colonnes {
+    gap: 2.5rem;
   }
 
-  .banniere h1,
-  h1 {
-    font-size: 1.7rem;
+  .banniere figure img {
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+  }
+
+  .parcours {
+    flex-direction: column;
+    gap: 1.25rem;
   }
 
   .formulaire {
-    padding: 1.25rem;
+    padding: 1.5rem 1.25rem;
   }
 
+  .frise li {
+    grid-template-columns: 4.6rem 1fr;
+    column-gap: 1.8rem;
+  }
+
+  .frise li::before {
+    left: calc(4.6rem + 0.9rem - 7px);
+  }
+
+  .frise li::after {
+    left: calc(4.6rem + 0.9rem - 1px);
+  }
+
+  .frise .heure {
+    font-size: 1.2rem;
+  }
+
+  /* tableaux défilables plutôt qu'écrasés */
   table {
-    font-size: 0.9rem;
+    display: block;
+    overflow-x: auto;
+    font-size: 0.92rem;
   }
 
   th,
   td {
-    padding: 0.6rem;
+    min-width: 9rem;
+  }
+}
+
+/* ---------- Préférences d'accessibilité ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media print {
+  .entete,
+  .pied,
+  .actions,
+  .evitement {
+    display: none;
+  }
+
+  body {
+    background: none;
   }
 }
